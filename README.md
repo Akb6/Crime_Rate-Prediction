@@ -1,32 +1,113 @@
-# 🕵️‍♂️ Crime Rate Prediction Using Machine Learning
+# Crime Rate Prediction
 
-This project aims to predict crime rates using machine learning algorithms such as **Random Forest** and **Linear Regression**, based on historical crime data. The model can help understand crime trends and assist authorities in proactive decision-making.
+A machine learning project that predicts crime rates based on location, year, and population.
 
-## 📊 Problem Statement
+## Overview
 
-Crime is a serious issue that affects the quality of life and safety of communities. Accurate prediction of crime rates can:
-- Help in resource planning for law enforcement agencies
-- Identify high-risk areas
-- Enable strategic interventions to reduce crime
+This project builds a regression model to predict crime rates for different regions across years. It uses data from US counties with features like:
+- **State** (categorical)
+- **PinCode/County Code** (categorical)
+- **Year** (numerical)
+- **Population** (numerical)
+- **Crime Rate** (target to predict)
 
-## 🧠 Algorithms Used
+## Dataset
 
-- **Linear Regression**  
-  For establishing a baseline and understanding linear trends in the dataset.
+The dataset (`Book1.csv`) contains historical crime statistics for US counties from 1967–2017:
+- **44+ records** covering multiple states and decades
+- **Manually compiled** from public crime statistics and census data
+- **Features**: State, PinCode, Year, Population, Crime Rate
 
-- **Random Forest Regressor**  
-  To capture non-linear relationships and improve prediction accuracy with ensemble learning.
+**Dataset Attribution:**
+This dataset was compiled from public US crime statistics and population census data. It represents a curated subset of county-level crime records for educational and research purposes.
 
-## 🧪 Evaluation Metrics
+## Model Performance
 
-- **Mean Squared Error (MSE)**  
-- **R-squared (R²) Score**  
-- **Cross-validation** to ensure model generalizability
+| Model | CV Score | Test MSE | Test R² |
+|-------|----------|----------|---------|
+| **Linear Regression** | -0.44 | 4.16 | 0.15 |
+| Random Forest | -0.39 | 5.78 | -0.18 |
 
-## ⚙️ Tech Stack
+**Best Model:** Linear Regression (R² = 0.15)
 
-- Python  
-- Pandas, NumPy  
-- Scikit-learn  
+## How It Works
+
+1. **Data Preprocessing**
+   - Categorical features (State, PinCode) → OneHotEncoder
+   - Numerical features (Year, Population) → StandardScaler
+   - Combined via ColumnTransformer pipeline
+
+2. **Model Training**
+   - Trains Linear Regression and Random Forest Regressor
+   - Uses 5-fold cross-validation for robust evaluation
+   - Compares models using MSE and R² metrics
+
+3. **Predictions**
+   - Model predicts crime rate given state, pincode, year, population
+   - Example: "Cherokee, AL" (2010, Pop 154) → Crime Rate ~8.4
+
+## Quick Start
+
+git clone https://github.com/Akb6/Crime_Rate-Prediction
+cd Crime_Rate-Prediction
+
+Install dependencies
+pip install pandas numpy scikit-learn
+
+Run the pipeline
+python crime_rate_prediction.py
+
+## Output
+
+Crime Rate Prediction - ML Pipeline
+
+✓ Dataset loaded: 44 records, 4 features
+
+✓ Data split: Train=35, Test=9
+
+✓ Features preprocessed: 7 features after encoding
+
+============================================================
+LINEAR REGRESSION MODEL
+Mean CV Score: -0.4357 (+/- 0.7194)
+Test MSE: 4.1647
+Test R² Score: 0.1524
+Test RMSE: 2.0408
+
+============================================================
+RANDOM FOREST REGRESSOR MODEL
+Mean CV Score: -0.3866 (+/- 0.8131)
+Test MSE: 5.7757
+Test R² Score: -0.1754
+Test RMSE: 2.4033
+
+============================================================
+MODEL COMPARISON
+text
+          Model Mean CV Score Test MSE Test R² Score
+Linear Regression -0.4357 4.1647 0.1524
+Random Forest -0.3866 5.7757 -0.1754
+
+✓ Best Model: Linear Regression (R² = 0.1524)
+
+============================================================
+✓ TRAINING COMPLETE
 
 
+## Why R² is Low
+
+The small dataset (44 records) and limited feature set mean the model explains ~15% of variance. Adding features like literacy rate, unemployment, or urbanization would improve predictions.
+
+## Technical Stack
+
+- **Python 3.8+**
+- **scikit-learn** - Machine Learning
+- **pandas** - Data processing
+- **numpy** - Numerical computing
+
+## Future Improvements
+
+- Add more features (literacy rate, unemployment, education levels)
+- Collect more historical data (500+ records)
+- Try advanced models (Gradient Boosting, XGBoost)
+- Time-series analysis for trend prediction
