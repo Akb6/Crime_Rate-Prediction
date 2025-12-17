@@ -67,31 +67,29 @@ Crime Rate Prediction - ML Pipeline
 
 ✓ Features preprocessed: 7 features after encoding
 
-============================================================
 LINEAR REGRESSION MODEL
+
 Mean CV Score: -0.4357 (+/- 0.7194)
 Test MSE: 4.1647
 Test R² Score: 0.1524
 Test RMSE: 2.0408
 
-============================================================
+
 RANDOM FOREST REGRESSOR MODEL
+
 Mean CV Score: -0.3866 (+/- 0.8131)
 Test MSE: 5.7757
 Test R² Score: -0.1754
 Test RMSE: 2.4033
 
-============================================================
+
 MODEL COMPARISON
-text
-          Model Mean CV Score Test MSE Test R² Score
+
+Model Mean CV Score Test MSE Test R² Score
 Linear Regression -0.4357 4.1647 0.1524
 Random Forest -0.3866 5.7757 -0.1754
 
 ✓ Best Model: Linear Regression (R² = 0.1524)
-
-============================================================
-✓ TRAINING COMPLETE
 
 
 ## Why R² is Low
